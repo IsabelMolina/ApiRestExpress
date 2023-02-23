@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.get('/', async(req, res)=>{
 
-    const mascotas = await Pet.find();
+    const pets = await Pet.find();
 
-    res.json(mascotas);
+    res.json(pets);
 
 })
 
@@ -16,8 +16,8 @@ router.get('/:id', async(req, res)=>{
     const id = req.params.id;
 
     try {
-        const mascota = await Pet.findOne({_id: id});
-        return res.json(mascota);
+        const pet = await Pet.findOne({_id: id});
+        return res.json(pet);
     } 
     catch (error) {        
         return res.sendStatus(404);
@@ -63,10 +63,8 @@ router.delete('/:id', async(req, res)=>{
     const id = req.params.id;
 
     try {        
-
         await Pet.findByIdAndDelete({ _id: id });
         return res.sendStatus(204);
-
     } catch (error) {
         return res.sendStatus(404);
     }    
